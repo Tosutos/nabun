@@ -130,8 +130,9 @@ export default function ScanPage() {
       );
 
       if (isLabelKey(top.className)) {
+        const label = top.className;
         setHistory((prev) =>
-          [{ label: top.className, probability: top.probability }, ...prev].slice(
+          [{ label, probability: top.probability }, ...prev].slice(
             0,
             HISTORY_SIZE
           )
@@ -140,14 +141,14 @@ export default function ScanPage() {
         const now = performance.now();
         if (
           top.probability >= LOCK_THRESHOLD &&
-          stableLabelRef.current === top.className
+          stableLabelRef.current === label
         ) {
           if (stableStartRef.current && now - stableStartRef.current >= LOCK_DURATION_MS) {
-            lockResult(top.className, top.probability);
+            lockResult(label, top.probability);
             return;
           }
         } else if (top.probability >= LOCK_THRESHOLD) {
-          stableLabelRef.current = top.className;
+          stableLabelRef.current = label;
           stableStartRef.current = now;
         } else {
           stableLabelRef.current = null;

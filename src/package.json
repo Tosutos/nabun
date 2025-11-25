@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@teachablemachine/image": "^0.8.4-alpha2",
-    "encoding": "^0.1.13",
     "next": "^14.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
